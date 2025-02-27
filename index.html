@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Redirecting to IMPACT-MH Data Portal</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+            text-align: center;
+            padding: 0;
+            position: relative;
+            background-color: #0c1d3d; /* Fallback color */
+            overflow: hidden;
+        }
+        
+        /* Background image styling */
+        .background-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('background.jpeg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            z-index: -2;
+        }
+        
+        /* Gradient overlay */
+        .gradient-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(0deg, rgba(12, 29, 61, 0.50) 0%, rgba(12, 29, 61, 0.50) 100%);
+            z-index: -1;
+        }
+        
+        .container {
+            width: 599.20px;
+            max-width: 90%;
+            padding: 2rem;
+            background: linear-gradient(118deg, rgba(255, 255, 255, 0.50) 0%, rgba(235.43, 235.43, 235.43, 0.37) 20%, rgba(223.66, 223.66, 223.66, 0.29) 28%, rgba(212.42, 212.42, 212.42, 0.21) 40%, rgba(207.15, 207.15, 207.15, 0.18) 48%, rgba(202.41, 202.41, 202.41, 0.14) 54%, rgba(199.88, 199.88, 199.88, 0.13) 59%, rgba(196, 196, 196, 0.10) 67%);
+            box-shadow: 0px 1px 24px -1px rgba(0, 0, 0, 0.18);
+            border-radius: 19px;
+            border: 1px #D7E3FC solid;
+            backdrop-filter: blur(24px);
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        
+        .logo {
+            width: 173px;
+            height: 80px;
+            margin-bottom: 1rem;
+        }
+        
+        .redirect-heading {
+            width: 402px;
+            max-width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 28px;
+            font-family: 'Red Hat Text';
+            font-weight: 600;
+            word-wrap: break-word;
+            margin-bottom: 1rem;
+        }
+        
+        .message {
+            width: 427px;
+            max-width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-family: 'Red Hat Text';
+            font-weight: 500;
+            line-height: 23.40px;
+            word-wrap: break-word;
+            margin: 1rem 0;
+        }
+        
+        .warning {
+            width: 465px;
+            max-width: 100%;
+            text-align: center;
+            color: white;
+            font-size: 18px;
+            font-family: 'Red Hat Text';
+            font-weight: 500;
+            line-height: 23.40px;
+            word-wrap: break-word;
+            text-shadow: 0px 0px 7px rgba(238, 43, 110, 1.00);
+        }
+        
+        .progress-bar {
+            width: 100%;
+            height: 4px;
+            background-color: rgba(255, 255, 255, 0.3);
+            margin-top: 2rem;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+        
+        .progress {
+            width: 100%;
+            height: 100%;
+            background-color: #00356b;
+            transition: transform 5s linear;
+            transform-origin: left;
+        }
+    </style>
+    <!-- Add Red Hat Text font -->
+    <link href="https://fonts.googleapis.com/css2?family=Red+Hat+Text:wght@400;500;600&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Background image -->
+    <div class="background-image"></div>
+    
+    <!-- Gradient overlay with exact specifications -->
+    <div class="gradient-overlay"></div>
+    
+    <div class="container">
+        <!-- IMPACT-MH Logo -->
+        <img class="logo" src="impact-colorful.png" alt="IMPACT Mental Health Logo" />
+        
+        <!-- Updated redirect heading with specific styling -->
+        <div class="redirect-heading">Redirecting to IMPACT-MH Data Portal</div>
+        
+        <p class="message">You will be redirected in <span id="countdown">5</span> seconds...</p>
+        
+        <p class="warning">Please ensure you are connected to Yale's network via VPN, as this page is restricted to Yale's private servers.</p>
+        <div class="progress-bar">
+            <div class="progress" id="progress"></div>
+        </div>
+    </div>
+
+<script>
+        // Set the URL to redirect to
+        const redirectURL = 'https://spinup-002b0f.spinup.yale.edu/login';  // Replace with actual URL
+        
+        // Initialize countdown
+        let timeLeft = 5;
+        const countdownElement = document.getElementById('countdown');
+        const progressElement = document.getElementById('progress');
+        
+        // Start the progress bar animation
+        progressElement.style.transform = 'scaleX(0)';
+        
+        // Trigger reflow to ensure the initial state is applied before the animation starts
+        progressElement.offsetWidth;
+        
+        // Start the progress bar animation
+        setTimeout(() => {
+            progressElement.style.transform = 'scaleX(1)';
+        }, 50);
+        
+        // Update countdown every second
+        const countdown = setInterval(() => {
+            timeLeft--;
+            countdownElement.textContent = timeLeft;
+            
+            if (timeLeft <= 0) {
+                clearInterval(countdown);
+                window.location.href = redirectURL;
+            }
+        }, 1000);
+        
+        // Start the page load
+        document.addEventListener('DOMContentLoaded', () => {
+            setTimeout(() => {
+                window.location.href = redirectURL;
+            }, 5000);
+        });
+    </script>
+</body>
+</html> 
